@@ -1,0 +1,197 @@
+#welcomeDiv{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+#welcomeImg{
+    height: 40%;
+    width: auto;
+}
+#startButton{
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 20%;
+    display: none;
+}
+#bodyContent{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+}
+#outputContainer{
+    border: 2px solid #34353b;
+    border-radius: 10px;
+    height: 90%;
+    width: 95%;
+    overflow-y: auto;
+}
+
+/* Style for the inputDiv element containing input line */
+.inputDiv {
+    border-bottom: 1px solid #253343;
+    padding: 15px 10px;
+    box-shadow: 0px 2px 4px rgba(33, 48, 73, 0.404);
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Style for the input lines */
+.inputDiv p {
+    margin: 0;
+    font-size: medium;
+    overflow-wrap: break-word;
+    padding: 0px 15px;
+}
+
+/* Style for the inputDiv element containing processed lines */
+.outputDiv {
+    background-color: #2a3540;
+    border-bottom: 1px solid #253343;
+    padding: 15px 10px;
+    box-shadow: 0px 2px 4px rgba(33, 48, 73, 0.404);
+    display: flex;
+    align-items: flex-start;
+}
+
+.outputBotImg{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+/* Style for the input and "Input processed" lines */
+.outputDiv p {
+    margin: 0;
+    overflow-wrap: break-word;
+    font-size: medium;
+    padding: 0px 15px;
+}
+
+/* Style to make the container at the bottom of the page */
+.bottom-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 2.5%;
+}
+
+/* Style for the input box and button */
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 70%;
+}
+
+button {
+    padding: 10px 20px;
+    margin-left : 1px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 20%;
+}
+
+.dot-flashing {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #9880ff;
+  color: #9880ff;
+  animation: dot-flashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+  margin-left: 30px;
+  margin-top: 18px;
+}
+.dot-flashing::before, .dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #9880ff;
+  color: #9880ff;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: hsl(221, 100%, 82%);
+  color: hsl(221, 100%, 82%);
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dot-flashing {
+  0% {
+    background-color: hsl(221, 100%, 82%);
+  }
+  50%, 100% {
+    background-color: rgba(128, 172, 255, 0.2);
+  }
+}
+
+#start-div{
+    display: flex;
+    align-items: stretch;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: 20px 10%;
+    flex-wrap: wrap;
+}
+
+#folder-input{
+    min-width: 60%;
+    display: flex;
+    align-items: center;
+    background: #343434;
+    border: 2px solid #393838;
+    border-radius: 5px;
+}
+
+#selectFolderButton{
+    border-radius: 0px;
+    flex: 0;
+    background: #4e4e4e;
+    padding: 15px;
+    width: 100px;
+}
+
+#selectedFolderPath{
+    font-size: medium;
+    margin: 0px 20px;
+    word-wrap: break-word;
+}
+
+.loader {
+    border: 7px solid #164693; /* Blue border color */
+    border-top: 7px solid #2865c6; /* Light gray border color for animation effect */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin: auto;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

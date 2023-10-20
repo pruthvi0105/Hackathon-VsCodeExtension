@@ -1,0 +1,143 @@
+<html>
+
+<head>
+    <title>Welcome to Code Companion</title>
+    <style>
+        #bodyContent{
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+        }
+        #outputContainer{
+            border: 2px solid #34353b;
+            border-radius: 10px;
+            height: 90%;
+            width: 95%;
+            overflow-y: scroll;
+        }
+
+        /* Style for the inputDiv element containing input line */
+        .inputDiv {
+            width: 100%;
+            border-bottom: 1px solid #253343;
+            padding: 10px;
+            box-shadow: 0px 2px 4px rgba(33, 48, 73, 0.404);
+        }
+
+        /* Style for the input lines */
+        .inputDiv p {
+            margin: 0;
+            font-size: medium;
+            overflow-wrap: break-word;
+        }
+
+        /* Style for the inputDiv element containing processed lines */
+        .outputDiv {
+            width: 100%;
+            background-color: #2a3540;
+            border-bottom: 1px solid #253343;
+            padding: 10px;
+            box-shadow: 0px 2px 4px rgba(33, 48, 73, 0.404);
+        }
+
+        /* Style for the input and "Input processed" lines */
+        .outputDiv p {
+            margin: 0;
+            font-size: medium;
+        }
+
+        /* Style to make the container at the bottom of the page */
+        .bottom-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding-bottom: 2.5%;
+        }
+        
+        /* Style for the input box and button */
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 70%;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-left : 1px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Welcome to Code Companion!</h1>
+    <!-- <img src="resources/welcome.png"></img> -->
+    <div id="bodyContent">
+        <div id="outputContainer">
+            <!-- Rendered input and "Input processed" lines will appear here -->
+        </div>
+        <div class="bottom-container">
+            <input type="text" id="textInput" placeholder="Enter text here">
+            <button id="processButton">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        const vscode = acquireVsCodeApi();
+        document.getElementById("processButton").addEventListener("click", () => {
+            console.log("Processed")
+            const inputText = document.getElementById("textInput").value;
+            const outputContainer = document.getElementById('outputContainer');
+            
+            // Create a new div element for the input lines
+            const inputDiv = document.createElement('div');
+            inputDiv.classList.add('inputDiv'); // Apply the 'inputDiv' CSS class
+            const inputLine = document.createElement('p');
+            inputLine.textContent = inputText;
+
+            // Append the lines to the container
+            inputDiv.appendChild(inputLine);
+            outputContainer.appendChild(inputDiv);
+
+
+            // Clear the input field
+            textInput.value = '';
+
+            vscode.postMessage({
+                command: "processInput",
+                text: inputText,
+            });
+        });
+
+
+        window.addEventListener('message', event => {
+    const message = event.data; // The JSON data our extension sent
+    console.log('triggered');
+    switch (message.command) {
+        case 'output':
+            const outputDiv = document.createElement('div');
+            outputDiv.classList.add('outputDiv'); // Apply the 'outputDiv' CSS class
+            const outputLine = document.createElement('p');
+            outputLine.textContent = message.text;
+            // Append the lines to the container
+            outputDiv.appendChild(outputLine);
+            outputContainer.appendChild(outputDiv);
+
+            // This logs the received text to the console
+            console.log(`Received output: ${message.text}`);
+            break;
+    }
+});
+    </script>
+</body>
+
+</html>
+
